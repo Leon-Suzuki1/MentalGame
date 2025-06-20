@@ -27,6 +27,9 @@ app.use('/api/streaks', streaksRoutes);
 const badgesRoutes = require('./routes/badgesRoutes');
 app.use('/api/badges', badgesRoutes);
 
+const rephrasedThoughtRoutes = require('./routes/rephrasedThoughtRoutes');
+app.use('/api/rephrase', rephrasedThoughtRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rephrase Thoughts - Mental Wellness App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rephrase Your Thoughts</h1>
+        <p>Turn negative thinking patterns into more positive and constructive ones.</p>
+
+        <div id="rephraseFormSection" class="form-section">
+            <h2 id="rephraseFormTitle">Add New Thought Pair</h2>
+            <form id="rephraseForm">
+                <input type="hidden" id="rephraseEntryId" name="entryId">
+                <div>
+                    <label for="negativeThought">Negative Thought:</label>
+                    <textarea id="negativeThought" name="negativeThought" rows="4" required></textarea>
+                </div>
+                <div>
+                    <label for="rephrasedThought">Rephrased Version:</label>
+                    <textarea id="rephrasedThought" name="rephrasedThought" rows="4" required></textarea>
+                </div>
+                <div>
+                    <label for="thoughtCategory">Category (Optional):</label>
+                    <input type="text" id="thoughtCategory" name="category" placeholder="e.g., Work, Relationships">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button-primary">Save Pair</button>
+                    <button type="button" id="cancelRephraseEditButton" class="button-secondary" style="display: none;">Cancel</button>
+                </div>
+            </form>
+            <div id="rephraseMessage" class="message" style="display: none;"></div>
+        </div>
+
+        <h2>Your Saved Thought Pairs</h2>
+        <div id="rephrasedThoughtsList">
+            <!-- Rephrased thoughts will be loaded here by JavaScript -->
+            <p>Loading your saved thoughts...</p>
+        </div>
+
+        <p style="margin-top: 30px;"><a href="dashboard.html">Back to Dashboard</a></p>
+    </div>
+    <script src="js/rephrase.js"></script>
+</body>
+</html>
