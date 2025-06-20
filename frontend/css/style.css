@@ -186,3 +186,119 @@ p {
     /* display: inline-block; */ /* If it needs to be more button-like */
     /* margin-top: 15px; */
 }
+
+/* Journal Page Specific Styles */
+#showJournalFormButton {
+    /* Uses general button styles, can add specifics if needed e.g. margin-bottom */
+    margin-bottom: 20px;
+}
+
+.form-section { /* General class for sections containing forms */
+    background-color: #f9f9f9; /* Slightly off-white background for form area */
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+}
+
+#journalForm div { /* Overriding default form div margin if needed, or use more specific selector */
+    margin-bottom: 15px; /* Standard spacing for journal form fields */
+}
+
+#journalForm textarea {
+    min-height: 150px; /* Good height for journal content */
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+}
+
+.form-actions button {
+    flex-grow: 1; /* Make buttons take equal width if desired */
+}
+
+/* General button styles if not already defined or need variations */
+.button-primary { /* Already styled by general button[type="submit"] potentially */
+    /* background-color: #007bff; color: white; ... */
+}
+
+.button-secondary {
+    background-color: #6c757d; /* Grey for secondary actions like cancel */
+    color: white;
+    padding: 10px 15px; /* Adjusted padding from primary if needed */
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button-secondary:hover {
+    background-color: #5a6268;
+}
+
+.button-danger { /* For delete buttons */
+    background-color: #ff4d4f;
+    color: white;
+    padding: 6px 12px; /* Smaller padding for list item buttons */
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button-danger:hover {
+    background-color: #d9363e;
+}
+
+
+#journalEntriesList {
+    margin-top: 20px;
+}
+
+.journal-entry-item {
+    background-color: #ffffff; /* White background for each entry item */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.journal-entry-item h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #0052cc; /* Blue for entry titles */
+    font-size: 1.2em;
+}
+
+.journal-entry-item .entry-date {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.journal-entry-item .entry-content-preview {
+    font-size: 0.95em;
+    color: #444;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.journal-entry-item button { /* Specific styling for buttons within list items */
+    margin-right: 8px; /* Space between buttons if they are next to each other */
+}
+
+.journal-entry-item button:last-child {
+    margin-right: 0;
+}
+
+/* Journal Message specific styling if needed, beyond general .message */
+#journalMessage {
+    /* General .message styles should apply */
+    /* text-align: center; */ /* if not already centered */
+}

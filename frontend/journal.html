@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journal - Mental Wellness App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Journal</h1>
+
+        <button id="showJournalFormButton" type="button" class="button-primary">Create New Entry</button>
+
+        <div id="journalFormSection" class="form-section" style="display: none;">
+            <h2 id="formTitle">New Journal Entry</h2>
+            <form id="journalForm">
+                <input type="hidden" id="journalEntryId" name="entryId">
+                <div>
+                    <label for="journalTitle">Title (Optional):</label>
+                    <input type="text" id="journalTitle" name="title">
+                </div>
+                <div>
+                    <label for="journalContent">Your Thoughts:</label>
+                    <textarea id="journalContent" name="content" rows="10" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button-primary">Save Entry</button>
+                    <button type="button" id="cancelEditButton" class="button-secondary">Cancel</button>
+                </div>
+            </form>
+            <div id="journalMessage" class="message" style="display: none;"></div>
+        </div>
+
+        <h2>Your Past Entries</h2>
+        <div id="journalEntriesList">
+            <!-- Journal entries will be loaded here by JavaScript -->
+            <p>Loading your entries...</p>
+        </div>
+
+        <p style="margin-top: 30px;"><a href="dashboard.html">Back to Dashboard</a></p>
+    </div>
+    <script src="js/journal.js"></script>
+</body>
+</html>

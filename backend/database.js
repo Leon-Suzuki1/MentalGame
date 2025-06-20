@@ -7,7 +7,6 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
         throw err;
     } else {
         console.log('Connected to the SQLite database.');
-        // Use serialize to ensure table creations happen in order / one after another
         db.serialize(() => {
             db.run(`CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,14 +17,10 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                 calming_strategies TEXT,
                 CONSTRAINT email_unique UNIQUE (email)
             )`, (err) => {
-                if (err) {
-                    // console.log('Users table already exists or error creating it.');
-                } else {
-                    console.log('Users table checked/created successfully.');
-                }
+                if (err) { /* console.log('Users table already exists or error creating it.'); */ }
+                else { console.log('Users table checked/created successfully.'); }
             });
 
-            // Add the new table creation here
             db.run(`CREATE TABLE IF NOT EXISTS coping_box_items (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER NOT NULL,
@@ -33,11 +28,22 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             )`, (err) => {
-                if (err) {
-                    // console.log('Coping box items table already exists or error creating it.');
-                } else {
-                    console.log('Coping box items table checked/created successfully.');
-                }
+                if (err) { /* console.log('Coping box items table already exists or error creating it.'); */ }
+                else { console.log('Coping box items table checked/created successfully.'); }
+            });
+
+            // Add the new journal_entries table creation here
+            db.run(`CREATE TABLE IF NOT EXISTS journal_entries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                title TEXT,
+                content TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )`, (err) => {
+                if (err) { /* console.log('Journal entries table already exists or error creating it.'); */ }
+                else { console.log('Journal entries table checked/created successfully.'); }
             });
         });
     }

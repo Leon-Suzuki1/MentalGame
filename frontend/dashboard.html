@@ -11,25 +11,24 @@
         <h1>Welcome!</h1>
         <p>You are successfully logged in.</p>
 
-        <!-- Link to Coping Box -->
         <p><a href="copingbox.html">My Coping Box</a></p>
+        <p><a href="journal.html">My Journal</a></p> <!-- Added this line -->
 
         <p style="margin-top: 20px;"><a href="login.html" id="logoutLink">Logout</a></p>
     </div>
     <script>
-        // Basic protection & logout
+        // ... (existing script for logout and basic protection)
         const loggedInUser = sessionStorage.getItem('loggedInUser');
-        if (!loggedInUser) {
-            // In a real app, you'd also clear any stored tokens if redirecting.
-            // window.location.href = 'login.html';
-        }
+        // if (!loggedInUser && !sessionStorage.getItem('jwtToken')) { // More robust check
+        //     window.location.href = 'login.html';
+        // }
 
         const logoutLink = document.getElementById('logoutLink');
         if(logoutLink) {
             logoutLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 sessionStorage.removeItem('loggedInUser');
-                sessionStorage.removeItem('jwtToken'); // Clear token on logout
+                sessionStorage.removeItem('jwtToken');
                 window.location.href = 'login.html';
             });
         }
