@@ -1,7 +1,83 @@
+:root {
+    /* Light Theme (Default) */
+
+    /* Backgrounds */
+    --color-bg-page: #f4f7f9;
+    --color-bg-container: #ffffff;
+    --color-bg-container-alt: #f9f9f9; /* e.g., form sections, game results */
+    --color-bg-item: #e9f2ff; /* e.g., streak info, coping items, game question box */
+    --color-bg-input: #ffffff; /* Standard input background */
+    --color-bg-choice-neutral: #f8f9fa; /* For game choices, survey options */
+    --color-bg-choice-neutral-hover: #e9ecef;
+    --color-bg-badge-icon-placeholder: #f0f0f0; /* For actual badge icons if transparent/fail */
+
+
+    /* Text */
+    --color-text-primary: #333;
+    --color-text-secondary: #555; /* For labels, less important text */
+    --color-text-muted: #666; /* For p tags, some descriptions */
+    --color-text-heading: #0052cc; /* Darker blue for h1, section titles */
+    --color-text-link: #007bff;
+    --color-text-button-primary: #ffffff;
+    --color-text-button-secondary: #ffffff;
+    --color-text-button-danger: #ffffff;
+    --color-text-score: #0052cc;
+    --color-text-streak: #0052cc;
+    --color-text-badge-title: #333; /* Badge item titles */
+    --color-text-badge-desc: #666; /* Badge item descriptions */
+    --color-text-badge-earned-date: #007bff;
+    --color-text-category-tag: #555;
+    --color-text-placeholder-icon: #ffffff; /* For initial letter in badge placeholder */
+    --color-text-choice-button: #333;
+
+
+    /* Borders */
+    --color-border-input: #ccc;
+    --color-border-container-alt: #e0e0e0; /* For .form-section, badge items, survey options */
+    --color-border-item: #cce0ff; /* For streak info */
+    --color-border-choice-neutral: #ced4da;
+    --color-border-choice-neutral-hover: #adb5bd;
+    --color-border-section-heading: #e0e0e0; /* For badge section h2 bottom border */
+
+
+    /* Buttons */
+    --color-button-primary-bg: #007bff;
+    --color-button-primary-hover-bg: #0056b3;
+    --color-button-secondary-bg: #6c757d;
+    --color-button-secondary-hover-bg: #5a6268;
+    --color-button-danger-bg: #ff4d4f;
+    --color-button-danger-hover-bg: #d9363e;
+
+    /* Messages (Success/Error) */
+    --color-message-success-bg: #d4edda;
+    --color-message-success-text: #155724;
+    --color-message-success-border: #c3e6cb;
+    --color-message-error-bg: #f8d7da;
+    --color-message-error-text: #721c24;
+    --color-message-error-border: #f5c6cb;
+
+    /* Game Specific */
+    --color-game-choice-correct-bg: #28a745;
+    --color-game-choice-correct-border: #1e7e34;
+    --color-game-choice-incorrect-bg: #dc3545;
+    --color-game-choice-incorrect-border: #c82333;
+
+    /* Badge Specific */
+    --color-badge-icon-placeholder-earned-bg: #007bff;
+    --color-badge-icon-placeholder-unearned-bg: #adb5bd;
+    --color-category-tag-bg: #e9ecef;
+
+    /* Shadows */
+    --shadow-container: 0 8px 16px rgba(0, 0, 0, 0.1);
+    --shadow-item: 0 2px 5px rgba(0,0,0,0.05);
+    --shadow-badge-item: 0 3px 6px rgba(0,0,0,0.07);
+    --shadow-badge-item-hover: 0 5px 10px rgba(0,0,0,0.1);
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background-color: #f4f7f9; /* Light grey-blue background */
-    color: #333;
+    background-color: var(--color-bg-page);
+    color: var(--color-text-primary);
     margin: 0;
     padding: 20px;
     display: flex;
@@ -12,17 +88,17 @@ body {
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: var(--color-bg-container);
     padding: 30px 40px;
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-container);
     width: 100%;
     max-width: 450px;
     text-align: center;
 }
 
 h1 {
-    color: #0052cc; /* Darker blue for heading */
+    color: var(--color-text-heading);
     margin-bottom: 25px;
     font-size: 28px;
 }
@@ -36,7 +112,7 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #555;
+    color: var(--color-text-secondary);
 }
 
 input[type="email"],
@@ -44,12 +120,14 @@ input[type="password"],
 input[type="number"],
 input[type="text"],
 textarea {
-    width: calc(100% - 20px); /* Account for padding */
+    width: calc(100% - 20px);
     padding: 12px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border-input);
     border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
+    background-color: var(--color-bg-input);
+    color: var(--color-text-primary);
 }
 
 textarea {
@@ -58,8 +136,8 @@ textarea {
 }
 
 button[type="submit"] {
-    background-color: #007bff; /* Primary blue */
-    color: white;
+    background-color: var(--color-button-primary-bg);
+    color: var(--color-text-button-primary);
     padding: 12px 20px;
     border: none;
     border-radius: 8px;
@@ -72,11 +150,11 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: var(--color-button-primary-hover-bg);
 }
 
 a {
-    color: #007bff;
+    color: var(--color-text-link);
     text-decoration: none;
 }
 
@@ -87,7 +165,7 @@ a:hover {
 p {
     margin-top: 20px;
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-muted);
 }
 
 .message {
@@ -99,15 +177,15 @@ p {
 }
 
 .message.success {
-    background-color: #d4edda; /* Light green */
-    color: #155724; /* Dark green */
-    border: 1px solid #c3e6cb;
+    background-color: var(--color-message-success-bg);
+    color: var(--color-message-success-text);
+    border: 1px solid var(--color-message-success-border);
 }
 
 .message.error {
-    background-color: #f8d7da; /* Light red */
-    color: #721c24; /* Dark red */
-    border: 1px solid #f5c6cb;
+    background-color: var(--color-message-error-bg);
+    color: var(--color-message-error-text);
+    border: 1px solid var(--color-message-error-border);
 }
 
 /* Basic responsive adjustment for smaller screens */
@@ -127,40 +205,40 @@ p {
 /* Coping Box Specific Styles */
 .coping-box-content {
     margin-top: 25px;
-    text-align: left; /* Align content to left within the box section */
+    text-align: left;
 }
 
 #addCopingItemForm textarea {
-    min-height: 70px; /* Slightly smaller than generic textarea for this specific form */
-    margin-bottom: 10px; /* Space between textarea and button */
+    min-height: 70px;
+    margin-bottom: 10px;
 }
 
 #copingItemsList {
-    list-style-type: none; /* Remove default bullet points */
-    padding-left: 0; /* Remove default padding */
+    list-style-type: none;
+    padding-left: 0;
     margin-top: 20px;
 }
 
 #copingItemsList li {
-    background-color: #e9f2ff; /* Light blue background for items */
+    background-color: var(--color-bg-item);
     padding: 12px 15px;
     border-radius: 8px;
     margin-bottom: 10px;
-    display: flex; /* Use flexbox to align text and button */
-    justify-content: space-between; /* Push text and button to opposite ends */
-    align-items: center; /* Vertically align text and button */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 16px;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--color-text-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Kept rgba for subtle shadow */
 }
 
 #copingItemsList li:last-child {
     margin-bottom: 0;
 }
 
-.delete-item-btn {
-    background-color: #ff4d4f; /* Red for delete/remove */
-    color: white;
+.delete-item-btn { /* Also used by .button-danger in other contexts */
+    background-color: var(--color-button-danger-bg);
+    color: var(--color-text-button-danger);
     border: none;
     border-radius: 6px;
     padding: 6px 12px;
@@ -168,67 +246,70 @@ p {
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    margin-left: 15px; /* Space between item text and button */
+    margin-left: 15px;
 }
 
 .delete-item-btn:hover {
-    background-color: #d9363e; /* Darker red on hover */
+    background-color: var(--color-button-danger-hover-bg);
 }
 
-/* Ensure message div on coping box page is styled if not already covered by general .message */
 #copingBoxMessage {
-    /* Styles for .message .success .error are already defined globally */
-    /* This ensures it takes those styles if it only has 'message' class initially */
+    /* Uses general .message styles */
 }
 
-/* Adjustments for dashboard link on coping box page if needed */
-.container p a { /* This is general, check if it's good enough */
-    /* display: inline-block; */ /* If it needs to be more button-like */
-    /* margin-top: 15px; */
+.container p a {
+    /* Uses general 'a' styles */
 }
 
 /* Journal Page Specific Styles */
 #showJournalFormButton {
-    /* Uses general button styles, can add specifics if needed e.g. margin-bottom */
     margin-bottom: 20px;
 }
 
-.form-section { /* General class for sections containing forms */
-    background-color: #f9f9f9; /* Slightly off-white background for form area */
+.form-section {
+    background-color: var(--color-bg-container-alt);
     padding: 20px;
     border-radius: 8px;
     margin-top: 15px;
     margin-bottom: 30px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border-container-alt);
 }
 
-#journalForm div { /* Overriding default form div margin if needed, or use more specific selector */
-    margin-bottom: 15px; /* Standard spacing for journal form fields */
+#journalForm div {
+    margin-bottom: 15px;
 }
 
 #journalForm textarea {
-    min-height: 150px; /* Good height for journal content */
+    min-height: 150px;
 }
 
 .form-actions {
     margin-top: 20px;
     display: flex;
-    gap: 10px; /* Spacing between buttons */
+    gap: 10px;
 }
 
 .form-actions button {
-    flex-grow: 1; /* Make buttons take equal width if desired */
+    flex-grow: 1;
 }
 
-/* General button styles if not already defined or need variations */
-.button-primary { /* Already styled by general button[type="submit"] potentially */
-    /* background-color: #007bff; color: white; ... */
+.button-primary {
+    /* This class can be used on any button to get primary styles */
+    /* If it's a submit button, it gets them from button[type="submit"] */
+    /* If it's type="button", it needs these explicitly or from a more general .button class */
+    background-color: var(--color-button-primary-bg);
+    color: var(--color-text-button-primary);
+    /* padding, border, etc. should match button[type="submit"] or a base .button class */
 }
+.button-primary:hover {
+    background-color: var(--color-button-primary-hover-bg);
+}
+
 
 .button-secondary {
-    background-color: #6c757d; /* Grey for secondary actions like cancel */
-    color: white;
-    padding: 10px 15px; /* Adjusted padding from primary if needed */
+    background-color: var(--color-button-secondary-bg);
+    color: var(--color-text-button-secondary);
+    padding: 10px 15px;
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -237,13 +318,13 @@ p {
 }
 
 .button-secondary:hover {
-    background-color: #5a6268;
+    background-color: var(--color-button-secondary-hover-bg);
 }
 
-.button-danger { /* For delete buttons */
-    background-color: #ff4d4f;
-    color: white;
-    padding: 6px 12px; /* Smaller padding for list item buttons */
+.button-danger { /* Used for delete buttons in lists */
+    background-color: var(--color-button-danger-bg);
+    color: var(--color-text-button-danger);
+    padding: 6px 12px;
     border: none;
     border-radius: 6px;
     font-size: 13px;
@@ -252,7 +333,7 @@ p {
 }
 
 .button-danger:hover {
-    background-color: #d9363e;
+    background-color: var(--color-button-danger-hover-bg);
 }
 
 
@@ -261,62 +342,60 @@ p {
 }
 
 .journal-entry-item {
-    background-color: #ffffff; /* White background for each entry item */
+    background-color: var(--color-bg-container); /* White background */
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 15px;
-    border: 1px solid #e7e7e7;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid var(--color-border-container-alt);
+    box-shadow: var(--shadow-item);
 }
 
 .journal-entry-item h3 {
     margin-top: 0;
     margin-bottom: 8px;
-    color: #0052cc; /* Blue for entry titles */
+    color: var(--color-text-heading);
     font-size: 1.2em;
 }
 
 .journal-entry-item .entry-date {
     font-size: 0.85em;
-    color: #777;
+    color: var(--color-text-muted);
     margin-bottom: 10px;
 }
 
 .journal-entry-item .entry-content-preview {
     font-size: 0.95em;
-    color: #444;
+    color: var(--color-text-secondary);
     margin-bottom: 15px;
     line-height: 1.5;
 }
 
-.journal-entry-item button { /* Specific styling for buttons within list items */
-    margin-right: 8px; /* Space between buttons if they are next to each other */
+.journal-entry-item button {
+    margin-right: 8px;
 }
 
 .journal-entry-item button:last-child {
     margin-right: 0;
 }
 
-/* Journal Message specific styling if needed, beyond general .message */
 #journalMessage {
-    /* General .message styles should apply */
-    /* text-align: center; */ /* if not already centered */
+    /* Uses general .message styles */
 }
 
 /* Streaks Display on Dashboard */
 .streak-info {
-    background-color: #e9f2ff; /* Light blue, similar to coping box items */
+    background-color: var(--color-bg-item);
     padding: 10px 15px;
     border-radius: 8px;
     margin-top: 15px;
     margin-bottom: 15px;
-    text-align: center; /* Center streak text */
-    border: 1px solid #cce0ff;
+    text-align: center;
+    border: 1px solid var(--color-border-item);
 }
 
 .streak-info p {
     margin: 5px 0;
-    color: #0052cc; /* Darker blue for text */
+    color: var(--color-text-streak);
     font-size: 1em;
 }
 
@@ -327,56 +406,56 @@ p {
 /* Badges Page Styling */
 #earnedBadgesSection h2,
 #allBadgesSection h2 {
-    color: #0052cc; /* Blue for section titles */
+    color: var(--color-text-heading);
     margin-bottom: 15px;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 2px solid var(--color-border-section-heading);
     padding-bottom: 5px;
 }
 
 .badges-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 20px; /* Space between badge items */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
     margin-top: 10px;
 }
 
 .badge-item {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+    background-color: var(--color-bg-container);
+    border: 1px solid var(--color-border-container-alt);
     border-radius: 10px;
     padding: 15px;
     display: flex;
-    flex-direction: column; /* Stack icon and info vertically */
-    align-items: center; /* Center content */
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.07);
+    box-shadow: var(--shadow-badge-item);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .badge-item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-badge-item-hover);
 }
 
 .badge-icon {
-    width: 60px; /* Fixed size for actual icons */
+    width: 60px;
     height: 60px;
     margin-bottom: 12px;
-    object-fit: contain; /* Ensure icon fits well */
-    border-radius: 50%; /* Circular icons look good */
-    background-color: #f0f0f0; /* Placeholder bg if image is transparent or fails */
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: var(--color-bg-badge-icon-placeholder);
 }
 
 .badge-icon-placeholder {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #007bff; /* Primary blue */
-    color: white;
+    background-color: var(--color-badge-icon-placeholder-earned-bg);
+    color: var(--color-text-placeholder-icon);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px; /* Large initial letter */
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 12px;
 }
@@ -385,73 +464,65 @@ p {
     margin-top: 0;
     margin-bottom: 8px;
     font-size: 1.1em;
-    color: #333;
+    color: var(--color-text-badge-title);
 }
 
 .badge-info p {
     font-size: 0.9em;
-    color: #666;
+    color: var(--color-text-badge-desc);
     margin-bottom: 5px;
     line-height: 1.4;
 }
 
 .badge-info .earned-date {
     font-size: 0.8em;
-    color: #007bff; /* Blue for earned date */
+    color: var(--color-text-badge-earned-date);
     font-style: italic;
 }
 
-/* Differentiation for earned/unearned badges */
 .badge-item.unearned {
-    opacity: 0.6; /* Make unearned badges less prominent */
-    /* filter: grayscale(80%); */ /* Optional: make them grayscale */
+    opacity: 0.6;
 }
 
 .badge-item.unearned .badge-icon-placeholder {
-    background-color: #adb5bd; /* Grey for unearned placeholder */
-}
-
-.badge-item.earned .badge-icon-placeholder {
-    /* Already has primary blue, which is fine for earned */
+    background-color: var(--color-badge-icon-placeholder-unearned-bg);
 }
 
 /* Rephrasing Thoughts Page Specific Styles */
-
-#rephraseFormSection h2 { /* Style for the "Add New/Edit Thought Pair" title */
-    color: #0052cc;
+#rephraseFormSection h2 {
+    color: var(--color-text-heading);
     margin-bottom: 15px;
     font-size: 1.4em;
 }
 
 #rephraseForm textarea {
-    min-height: 80px; /* Good height for thought input */
-    margin-bottom: 10px; /* Consistent spacing */
+    min-height: 80px;
+    margin-bottom: 10px;
 }
 
 #rephraseForm #thoughtCategory {
-    margin-bottom: 10px; /* Spacing for category input */
+    margin-bottom: 10px;
 }
 
-/* Styling for the list of rephrased thoughts */
 #rephrasedThoughtsList {
     margin-top: 30px;
 }
 
 .rephrased-thought-item {
-    background-color: #fff;
-    border: 1px solid #e7e7e7;
+    background-color: var(--color-bg-container);
+    border: 1px solid var(--color-border-container-alt);
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    display: flex; /* For aligning content and actions */
+    box-shadow: var(--shadow-item);
+    display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Align items to the top */
-    gap: 15px; /* Space between thought content and actions */
+    align-items: flex-start;
+    gap: 15px;
 }
 
 .rephrased-thought-item .thought-content {
-    flex-grow: 1; /* Allow content to take available space */
+    flex-grow: 1;
 }
 
 .rephrased-thought-item .thought-content p {
@@ -461,48 +532,46 @@ p {
 }
 
 .rephrased-thought-item .thought-content p strong {
-    color: #333; /* Darker text for "Negative:" and "Rephrased:" labels */
+    color: var(--color-text-primary);
 }
 
 .rephrased-thought-item .category-tag {
     font-size: 0.85em;
-    color: #555;
-    background-color: #e9ecef; /* Light grey background for category */
+    color: var(--color-text-category-tag);
+    background-color: var(--color-category-tag-bg);
     padding: 3px 8px;
     border-radius: 4px;
-    display: inline-block; /* So padding and border-radius apply correctly */
+    display: inline-block;
     margin-bottom: 8px;
 }
 
 .rephrased-thought-item .date-display {
     font-size: 0.8em;
-    color: #777;
-    display: block; /* Ensure it's on its own line or properly spaced */
+    color: var(--color-text-muted);
+    display: block;
     margin-top: 5px;
 }
 
 .rephrased-thought-item .thought-actions {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 8px; /* Space between edit and delete buttons */
-    flex-shrink: 0; /* Prevent action buttons from shrinking */
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
 .rephrased-thought-item .thought-actions button {
-    min-width: 80px; /* Ensure buttons have a decent width */
-    padding: 6px 10px; /* Adjust padding for smaller buttons in list */
+    min-width: 80px;
+    padding: 6px 10px;
 }
 
-/* Ensure message div on rephrase page is styled if not already covered by general .message */
 #rephraseMessage {
-    /* General .message styles should apply */
-    margin-top: 15px; /* Add some space above the message if it appears after form */
+    /* Uses general .message styles */
+    margin-top: 15px;
 }
 
 /* Thought Matching Game Page Styles */
-
 .game-container {
-    max-width: 700px; /* Allow a bit more width for game layout */
+    max-width: 700px;
 }
 
 #gameControls {
@@ -515,7 +584,7 @@ p {
 #scoreArea {
     font-size: 1.2em;
     font-weight: bold;
-    color: #0052cc; /* Blue for score */
+    color: var(--color-text-score);
 }
 
 #gamePlayArea {
@@ -523,14 +592,14 @@ p {
 }
 
 .game-question-box {
-    background-color: #e9f2ff; /* Light blue background for question */
+    background-color: var(--color-bg-item);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
     font-size: 1.1em;
-    color: #333;
+    color: var(--color-text-primary);
     text-align: center;
-    min-height: 60px; /* Ensure some height even for short questions */
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -538,27 +607,26 @@ p {
 
 .game-choices-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for choices */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
 }
 
 .choice-button {
-    /* .button-secondary is a good base, but we might want specific padding/height */
-    background-color: #f8f9fa; /* Lighter, neutral background for choices */
-    color: #333;
-    border: 1px solid #ced4da;
-    padding: 15px 10px; /* Make buttons a bit taller */
-    text-align: left; /* Align text to left, typical for choice buttons */
-    width: 100%; /* Ensure full width within grid cell */
+    background-color: var(--color-bg-choice-neutral);
+    color: var(--color-text-choice-button);
+    border: 1px solid var(--color-border-choice-neutral);
+    padding: 15px 10px;
+    text-align: left;
+    width: 100%;
     transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
     font-size: 0.95em;
     line-height: 1.4;
-    border-radius: 8px; /* Consistent rounded corners */
+    border-radius: 8px;
 }
 
 .choice-button:hover:not(:disabled) {
-    background-color: #e9ecef;
-    border-color: #adb5bd;
+    background-color: var(--color-bg-choice-neutral-hover);
+    border-color: var(--color-border-choice-neutral-hover);
     transform: translateY(-2px);
 }
 
@@ -568,32 +636,29 @@ p {
 }
 
 .choice-button.correct-answer,
-.choice-button.correct-answer-reveal { /* Style for correctly selected or revealed correct answer */
-    background-color: #28a745; /* Green for correct */
-    color: white;
-    border-color: #1e7e34;
+.choice-button.correct-answer-reveal {
+    background-color: var(--color-game-choice-correct-bg);
+    color: var(--color-text-button-primary); /* Assuming white text for success/danger buttons */
+    border-color: var(--color-game-choice-correct-border);
 }
 
-.choice-button.incorrect-answer { /* Style for incorrectly selected answer */
-    background-color: #dc3545; /* Red for incorrect */
-    color: white;
-    border-color: #c82333;
+.choice-button.incorrect-answer {
+    background-color: var(--color-game-choice-incorrect-bg);
+    color: var(--color-text-button-primary); /* Assuming white text */
+    border-color: var(--color-game-choice-incorrect-border);
 }
 
 #gameFeedbackArea {
     margin-top: 15px;
-    min-height: 2.5em; /* Reserve space for feedback */
+    min-height: 2.5em;
     text-align: center;
     font-weight: bold;
 }
-/* .message.success and .message.error styles are already defined and will be used by gameFeedbackArea */
-
 
 #nextQuestionButton,
 #playAgainButton {
-    /* Uses .button-primary, ensure it's suitable or add overrides */
     margin-top: 20px;
-    display: block; /* Make it block to center easily if needed */
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }
@@ -601,12 +666,12 @@ p {
 #gameResultsArea {
     text-align: center;
     padding: 20px;
-    background-color: #f4f7f9;
+    background-color: var(--color-bg-container-alt);
     border-radius: 8px;
 }
 
 #gameResultsArea h2 {
-    color: #0052cc;
+    color: var(--color-text-heading);
     margin-bottom: 10px;
 }
 
@@ -616,15 +681,14 @@ p {
 }
 
 /* Daily Survey Page Styles */
-
-.survey-container { /* Can be same as .container or have minor tweaks */
-    max-width: 750px; /* Slightly wider for survey questions */
+.survey-container {
+    max-width: 750px;
 }
 
 #surveyIntroText {
     margin-bottom: 20px;
     font-size: 1.05em;
-    color: #555;
+    color: var(--color-text-secondary);
 }
 
 #surveyQuestionsArea {
@@ -633,33 +697,32 @@ p {
 }
 
 .survey-question-item {
-    background-color: #ffffff; /* White background for each question block */
+    background-color: var(--color-bg-container);
     padding: 15px 20px;
     border-radius: 8px;
     margin-bottom: 20px;
-    border: 1px solid #e7e7e7;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid var(--color-border-container-alt);
+    box-shadow: var(--shadow-item);
 }
 
-.survey-question-item label:first-child { /* The main question text label */
+.survey-question-item label:first-child {
     display: block;
     font-weight: 600;
-    color: #333;
+    color: var(--color-text-primary);
     margin-bottom: 12px;
     font-size: 1.1em;
 }
 
-/* Styling for scale_1_5 radio buttons */
 .scale-options {
     display: flex;
-    justify-content: space-around; /* Distribute scale numbers */
+    justify-content: space-around;
     align-items: center;
     padding: 5px 0;
 }
 
-.scale-options span { /* Wrapper for radio + label */
+.scale-options span {
     display: flex;
-    flex-direction: column; /* Stack radio above its number label */
+    flex-direction: column;
     align-items: center;
 }
 
@@ -669,30 +732,29 @@ p {
 
 .scale-options .scale-option-label {
     font-size: 0.9em;
-    color: #555;
-    margin-left: 0; /* Override general label margin if any */
-    font-weight: normal; /* Override general label weight if any */
+    color: var(--color-text-secondary);
+    margin-left: 0;
+    font-weight: normal;
 }
 
-/* Styling for multiple_choice_single radio buttons */
-.select-options { /* Container for multiple choice radio buttons */
+.select-options {
     display: flex;
-    flex-direction: column; /* Stack choices vertically */
+    flex-direction: column;
     gap: 8px;
 }
 
-.select-options span { /* Wrapper for each radio + label */
+.select-options span {
     display: flex;
     align-items: center;
-    background-color: #f8f9fa;
+    background-color: var(--color-bg-choice-neutral);
     padding: 8px 12px;
     border-radius: 6px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--color-border-container-alt);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 .select-options span:hover {
-    background-color: #e9ecef;
+    background-color: var(--color-bg-choice-neutral-hover);
 }
 
 .select-options input[type="radio"] {
@@ -700,23 +762,170 @@ p {
 }
 .select-options .choice-option-label {
     font-weight: normal;
-    color: #333;
+    color: var(--color-text-primary);
 }
 
-
-#surveyForm textarea { /* Specific to survey textareas if needed */
+#surveyForm textarea {
     min-height: 80px;
-    width: 100%; /* Ensure it takes full width of its container */
-    box-sizing: border-box; /* If not globally set for textareas */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #submitSurveyButton {
-    /* Should use .button-primary styles. Can add margin if needed */
-    /* Example: margin-left: auto; margin-right: auto; display: block; width: 50%; */
+    /* Uses .button-primary styles */
 }
 
 #surveyMessage {
-    /* .message styles already defined. Ensure it's prominent enough for survey feedback. */
-    margin-top: 15px; /* Space above if it appears after form elements */
-    text-align: center; /* Center survey messages */
+    /* Uses general .message styles */
+    margin-top: 15px;
+    text-align: center;
 }
+
+body.dark-mode {
+    /* Dark Theme Variable Overrides */
+
+    /* Backgrounds */
+    --color-bg-page: #1a1a1a;
+    --color-bg-container: #2c2c2c;
+    --color-bg-container-alt: #222222;
+    --color-bg-item: #363636;
+    --color-bg-input: #333333;
+    --color-bg-choice-neutral: #3a3a3a;
+    --color-bg-choice-neutral-hover: #4d4d4d;
+    --color-bg-badge-icon-placeholder: #555;
+
+
+    /* Text */
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #b0b0b0;
+    --color-text-muted: #888888;
+    --color-text-heading: #66aaff;
+    --color-text-link: #88ccff;
+    --color-text-button-primary: #ffffff;
+    --color-text-button-secondary: #e0e0e0;
+    --color-text-button-danger: #ffffff;
+    --color-text-score: #66aaff;
+    --color-text-streak: #66aaff;
+    --color-text-badge-title: #e0e0e0;
+    --color-text-badge-desc: #b0b0b0;
+    --color-text-badge-earned-date: #66aaff;
+    --color-text-category-tag: #c0c0c0;
+    --color-text-placeholder-icon: #e0e0e0;
+
+
+    /* Borders */
+    --color-border-input: #555555;
+    --color-border-container-alt: #444444;
+    --color-border-item: #4a5568;
+    --color-border-choice-neutral: #555555;
+    --color-border-choice-neutral-hover: #666666;
+    --color-border-section-heading: #444444;
+
+
+    /* Buttons */
+    --color-button-primary-bg: #0066cc;
+    --color-button-primary-hover-bg: #004c99;
+    --color-button-secondary-bg: #555555;
+    --color-button-secondary-hover-bg: #666666;
+    --color-button-danger-bg: #cc3333;
+    --color-button-danger-hover-bg: #aa2222;
+
+
+    /* Messages (Success/Error) */
+    --color-message-success-bg: #22442D;
+    --color-message-success-text: #90ee90;
+    --color-message-success-border: #336644;
+    --color-message-error-bg: #552222;
+    --color-message-error-text: #ffaaaa;
+    --color-message-error-border: #773333;
+
+
+    /* Game Specific */
+    --color-game-choice-correct-bg: #227733;
+    --color-game-choice-correct-border: #115522;
+    --color-game-choice-incorrect-bg: #aa2222;
+    --color-game-choice-incorrect-border: #881111;
+    --color-game-question-bg: #363636; /* Same as --color-bg-item */
+
+
+    /* Badge Specific */
+    --color-badge-icon-placeholder-earned-bg: #66aaff;
+    --color-badge-icon-placeholder-unearned-bg: #484848;
+    --color-category-tag-bg: #444444;
+
+
+    /* Shadows */
+    --shadow-container: 0 6px 12px rgba(0, 0, 0, 0.3);
+    --shadow-item: 0 2px 4px rgba(0,0,0,0.25);
+    --shadow-badge-item: 0 3px 6px rgba(0, 0, 0, 0.25);
+    --shadow-badge-item-hover: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific overrides for dark mode if variables are not enough or for complex components */
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="number"],
+body.dark-mode textarea {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-input);
+    border-color: var(--color-border-input);
+}
+/* Ensure placeholder text in inputs is also visible in dark mode */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: var(--color-text-muted);
+}
+
+
+body.dark-mode .choice-button { /* Game choice buttons */
+    background-color: var(--color-bg-choice-neutral);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-choice-neutral);
+}
+
+body.dark-mode .choice-button:hover:not(:disabled) {
+    background-color: var(--color-bg-choice-neutral-hover);
+    border-color: var(--color-border-choice-neutral-hover);
+}
+
+/* Survey page multiple choice options */
+body.dark-mode .select-options span {
+    background-color: var(--color-bg-choice-neutral);
+    border-color: var(--color-border-container-alt);
+}
+body.dark-mode .select-options span:hover {
+    background-color: var(--color-bg-choice-neutral-hover);
+}
+body.dark-mode .select-options .choice-option-label {
+    color: var(--color-text-primary);
+}
+
+/* Badge icon placeholder for actual images that might be light/transparent */
+body.dark-mode .badge-icon {
+    background-color: var(--color-bg-badge-icon-placeholder);
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle-container {
+    position: absolute; /* Or fixed, depending on desired placement */
+    top: 15px;
+    right: 15px;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+#themeToggleBtn {
+    padding: 8px 12px;
+    font-size: 0.85em;
+    /* Uses .button-secondary variables by default if class is applied */
+    /* Override if a different look is desired for this specific button */
+    background-color: var(--color-button-secondary-bg);
+    color: var(--color-text-button-secondary);
+    border: 1px solid var(--color-border-input); /* Use --color-border-input for consistency */
+}
+
+#themeToggleBtn:hover {
+    background-color: var(--color-button-secondary-hover-bg);
+}
+
+/* body.dark-mode #themeToggleBtn { } // Specific overrides for dark mode if needed */
