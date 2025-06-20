@@ -79,7 +79,13 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                         { name: 'First Journal Entry', description: 'Wrote your first journal entry.', icon_url: 'icons/badge_journal_first.png', criteria: 'CREATE_FIRST_JOURNAL_ENTRY' },
                         { name: '5 Day Login Streak', description: 'Logged in 5 days in a row.', icon_url: 'icons/badge_login_5_day.png', criteria: 'LOGIN_STREAK_5' },
                         { name: 'Mindful Start', description: 'Completed your first mindfulness exercise.', icon_url: 'icons/badge_mindful_start.png', criteria: 'MINDFULNESS_FIRST_EXERCISE'},
-                        { name: 'First Game Played', description: 'Completed your first round of the Thought Matching Game.', icon_url: 'icons/badge_game_first.png', criteria: 'GAME_FIRST_ROUND_COMPLETE' } // Added
+                        { name: 'First Game Played', description: 'Completed your first round of the Thought Matching Game.', icon_url: 'icons/badge_game_first.png', criteria: 'GAME_FIRST_ROUND_COMPLETE' },
+                        {
+                          name: 'First Survey Completed',
+                          description: 'Completed your first Daily Survey.',
+                          icon_url: 'icons/badge_survey_first.png',
+                          criteria: 'SURVEY_FIRST_COMPLETE'
+                        } // Added this new badge
                     ];
                     const stmt = db.prepare("INSERT OR IGNORE INTO badges (name, description, icon_url, criteria) VALUES (?, ?, ?, ?)");
                     badgesToInsert.forEach(badge => {
@@ -89,7 +95,7 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                     });
                     stmt.finalize((finalizeErr) => {
                         if (finalizeErr) console.error("Error finalizing badge insertion statement:", finalizeErr.message);
-                        else console.log("Initial badges checked/inserted (including First Game Played).");
+                        else console.log("Initial badges checked/inserted (including First Survey Completed).");
                     });
                 }
             });
@@ -164,6 +170,54 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                         else console.log("Initial game matching pairs checked/inserted.");
                     });
                 }
+            });
+
+            // Create survey_questions table
+            db.run(`CREATE TABLE IF NOT EXISTS survey_questions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                question_text TEXT UNIQUE NOT NULL,
+                question_type TEXT NOT NULL CHECK(question_type IN ('scale_1_5', 'text', 'multiple_choice_single')),
+                options TEXT, -- JSON array of strings for multiple_choice_single
+                is_active BOOLEAN DEFAULT TRUE,
+                sort_order INTEGER DEFAULT 0
+            )`, (err) => {
+                if (err) {
+                    console.error("Error creating survey_questions table:", err.message);
+                } else {
+                    console.log('Survey questions table checked/created successfully.');
+                    const questionsToInsert = [
+                        { text: "On a scale of 1 (Not Good) to 5 (Very Good), how would you rate your mood today?", type: "scale_1_5", options: null, order: 1 },
+                        { text: "What is one thing you are grateful for today?", type: "text", options: null, order: 2 },
+                        { text: "Did you engage in any physical activity today?", type: "multiple_choice_single", options: JSON.stringify(["Yes", "No, but I plan to", "No"]), order: 3 },
+                        { text: "How well did you sleep last night (1-Poor, 5-Excellent)?", type: "scale_1_5", options: null, order: 4 },
+                        { text: "Briefly describe a positive interaction you had today (if any).", type: "text", options: null, order: 5 }
+                    ];
+                    const stmt = db.prepare("INSERT OR IGNORE INTO survey_questions (question_text, question_type, options, sort_order) VALUES (?, ?, ?, ?)");
+                    questionsToInsert.forEach(q => {
+                        stmt.run(q.text, q.type, q.options, q.order, (insertErr) => {
+                            if (insertErr) console.error(`Error inserting survey question '${q.text}':`, insertErr.message);
+                        });
+                    });
+                    stmt.finalize((finalizeErr) => {
+                        if (finalizeErr) console.error("Error finalizing survey question insertion:", finalizeErr.message);
+                        else console.log("Initial survey questions checked/inserted.");
+                    });
+                }
+            });
+
+            // Create survey_answers table
+            db.run(`CREATE TABLE IF NOT EXISTS survey_answers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                question_id INTEGER NOT NULL,
+                answer_value TEXT NOT NULL,
+                answered_on DATE NOT NULL,
+                UNIQUE (user_id, question_id, answered_on),
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (question_id) REFERENCES survey_questions(id) ON DELETE CASCADE
+            )`, (err) => {
+                if (err) { console.error("Error creating survey_answers table:", err.message); }
+                else { console.log('Survey answers table checked/created successfully.'); }
             });
 
         });

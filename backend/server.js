@@ -33,6 +33,9 @@ app.use('/api/rephrase', rephrasedThoughtRoutes);
 const gameRoutes = require('./routes/gameRoutes');
 app.use('/api/game', gameRoutes);
 
+const surveyRoutes = require('./routes/surveyRoutes');
+app.use('/api/survey', surveyRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

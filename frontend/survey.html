@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Survey - Mental Wellness App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container survey-container">
+        <h1>Daily Check-in</h1>
+        <p id="surveyIntroText">Please take a few moments to reflect and answer the questions below.</p>
+
+        <div id="surveyMessage" class="message" style="display: none;">
+            <!-- Messages like "Survey submitted successfully" or "Already completed today" -->
+        </div>
+
+        <form id="surveyForm">
+            <div id="surveyQuestionsArea">
+                <!-- Survey questions will be dynamically loaded here by JavaScript -->
+                <p>Loading survey questions...</p>
+            </div>
+            <div class="form-actions" style="margin-top: 20px;">
+                <button type="submit" id="submitSurveyButton" class="button-primary">Submit Survey</button>
+            </div>
+        </form>
+
+        <p style="margin-top: 30px;"><a href="dashboard.html">Back to Dashboard</a></p>
+    </div>
+    <script src="js/survey.js"></script>
+</body>
+</html>

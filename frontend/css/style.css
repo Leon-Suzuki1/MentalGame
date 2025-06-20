@@ -614,3 +614,109 @@ p {
     font-size: 1.2em;
     margin-bottom: 20px;
 }
+
+/* Daily Survey Page Styles */
+
+.survey-container { /* Can be same as .container or have minor tweaks */
+    max-width: 750px; /* Slightly wider for survey questions */
+}
+
+#surveyIntroText {
+    margin-bottom: 20px;
+    font-size: 1.05em;
+    color: #555;
+}
+
+#surveyQuestionsArea {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.survey-question-item {
+    background-color: #ffffff; /* White background for each question block */
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.survey-question-item label:first-child { /* The main question text label */
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+/* Styling for scale_1_5 radio buttons */
+.scale-options {
+    display: flex;
+    justify-content: space-around; /* Distribute scale numbers */
+    align-items: center;
+    padding: 5px 0;
+}
+
+.scale-options span { /* Wrapper for radio + label */
+    display: flex;
+    flex-direction: column; /* Stack radio above its number label */
+    align-items: center;
+}
+
+.scale-options input[type="radio"] {
+    margin-bottom: 4px;
+}
+
+.scale-options .scale-option-label {
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 0; /* Override general label margin if any */
+    font-weight: normal; /* Override general label weight if any */
+}
+
+/* Styling for multiple_choice_single radio buttons */
+.select-options { /* Container for multiple choice radio buttons */
+    display: flex;
+    flex-direction: column; /* Stack choices vertically */
+    gap: 8px;
+}
+
+.select-options span { /* Wrapper for each radio + label */
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.select-options span:hover {
+    background-color: #e9ecef;
+}
+
+.select-options input[type="radio"] {
+    margin-right: 8px;
+}
+.select-options .choice-option-label {
+    font-weight: normal;
+    color: #333;
+}
+
+
+#surveyForm textarea { /* Specific to survey textareas if needed */
+    min-height: 80px;
+    width: 100%; /* Ensure it takes full width of its container */
+    box-sizing: border-box; /* If not globally set for textareas */
+}
+
+#submitSurveyButton {
+    /* Should use .button-primary styles. Can add margin if needed */
+    /* Example: margin-left: auto; margin-right: auto; display: block; width: 50%; */
+}
+
+#surveyMessage {
+    /* .message styles already defined. Ensure it's prominent enough for survey feedback. */
+    margin-top: 15px; /* Space above if it appears after form elements */
+    text-align: center; /* Center survey messages */
+}
