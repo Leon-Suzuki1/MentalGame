@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const API_BASE_URL = 'http://localhost:3000/api/auth';
 
     if (registerForm) {
-        // ... (registration form logic remains as is)
         registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             messageDiv.textContent = '';
@@ -68,11 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     messageDiv.textContent = data.message || 'Login successful! Redirecting...';
                     messageDiv.className = 'message success';
-                    // In a real app, you would store the token (data.token) from the backend
-                    // For now, we can simulate a logged-in state for redirection
-                    if(data.user && data.user.email) {
-                        sessionStorage.setItem('loggedInUser', data.user.email); // Example
+
+                    // Store the JWT
+                    if (data.token) {
+                        sessionStorage.setItem('jwtToken', data.token);
                     }
+                    // Also store user email for convenience if needed, or rely on token decoding elsewhere
+                    if(data.user && data.user.email) {
+                        sessionStorage.setItem('loggedInUser', data.user.email);
+                    }
+
                     loginForm.reset();
                     setTimeout(() => {
                         window.location.href = 'dashboard.html'; // Redirect to a dashboard page
@@ -80,11 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     messageDiv.textContent = data.message || 'Login failed. Please check your credentials.';
                     messageDiv.className = 'message error';
+                    sessionStorage.removeItem('jwtToken'); // Clear any stale token on failed login
+                    sessionStorage.removeItem('loggedInUser');
                 }
             } catch (error) {
                 console.error('Login error:', error);
                 messageDiv.textContent = 'An error occurred during login. Please try again.';
                 messageDiv.className = 'message error';
+                sessionStorage.removeItem('jwtToken'); // Clear any stale token on error
+                sessionStorage.removeItem('loggedInUser');
             }
         });
     }

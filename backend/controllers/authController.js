@@ -1,5 +1,8 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken'); // Added
 const db = require('../database');
+
+const JWT_SECRET = 'your_very_secret_key_that_should_be_in_env'; // Added: Use a strong, unique key
 
 // Register function remains the same as before
 exports.register = async (req, res) => {
@@ -57,27 +60,42 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: 'Login failed. User not found.' });
         }
 
-        // Compare password
         try {
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
                 return res.status(401).json({ message: 'Login failed. Incorrect password.' });
             }
 
-            // Login successful
-            // For now, just send a success message. Later, we'll implement JWT token generation here.
-            res.status(200).json({
-                message: 'Login successful!',
+            // Create JWT Payload
+            const payload = {
                 user: {
                     id: user.id,
-                    email: user.email,
-                    age: user.age,
-                    gender: user.gender
-                    // Do NOT send password back
+                    email: user.email
+                    // Add other non-sensitive user details if needed in the token
                 }
-            });
+            };
+
+            // Sign and send token
+            jwt.sign(
+                payload,
+                JWT_SECRET,
+                { expiresIn: '1h' }, // Token expires in 1 hour
+                (err, token) => {
+                    if (err) throw err;
+                    res.status(200).json({
+                        message: 'Login successful!',
+                        token: token,
+                        user: { // Also return user info for convenience on the frontend
+                            id: user.id,
+                            email: user.email,
+                            age: user.age,
+                            gender: user.gender
+                        }
+                    });
+                }
+            );
         } catch (error) {
-            res.status(500).json({ message: 'Error comparing passwords.', error: error.message });
+            res.status(500).json({ message: 'Error during login process.', error: error.message });
         }
     });
 };

@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+const copingBoxRoutes = require('./routes/copingBoxRoutes');
+app.use('/api/copingbox', copingBoxRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

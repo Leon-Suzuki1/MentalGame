@@ -1,31 +1,44 @@
 const sqlite3 = require('sqlite3').verbose();
-
-// Connect to SQLite database. Creates the file if it does not exist.
 const DBSOURCE = "main.db";
 
 const db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
-        // Cannot open database
         console.error(err.message);
         throw err;
     } else {
         console.log('Connected to the SQLite database.');
-        db.run(`CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            age INTEGER,
-            gender TEXT,
-            calming_strategies TEXT,
-            CONSTRAINT email_unique UNIQUE (email)
-        )`, (err) => {
-            if (err) {
-                // Table already created or other error
-                console.log('Users table already exists or error creating it.');
-            } else {
-                // Table just created, creating some rows
-                console.log('Users table created successfully.');
-            }
+        // Use serialize to ensure table creations happen in order / one after another
+        db.serialize(() => {
+            db.run(`CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL,
+                age INTEGER,
+                gender TEXT,
+                calming_strategies TEXT,
+                CONSTRAINT email_unique UNIQUE (email)
+            )`, (err) => {
+                if (err) {
+                    // console.log('Users table already exists or error creating it.');
+                } else {
+                    console.log('Users table checked/created successfully.');
+                }
+            });
+
+            // Add the new table creation here
+            db.run(`CREATE TABLE IF NOT EXISTS coping_box_items (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                item_text TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )`, (err) => {
+                if (err) {
+                    // console.log('Coping box items table already exists or error creating it.');
+                } else {
+                    console.log('Coping box items table checked/created successfully.');
+                }
+            });
         });
     }
 });

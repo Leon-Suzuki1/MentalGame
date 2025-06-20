@@ -123,3 +123,66 @@ p {
         font-size: 24px;
     }
 }
+
+/* Coping Box Specific Styles */
+.coping-box-content {
+    margin-top: 25px;
+    text-align: left; /* Align content to left within the box section */
+}
+
+#addCopingItemForm textarea {
+    min-height: 70px; /* Slightly smaller than generic textarea for this specific form */
+    margin-bottom: 10px; /* Space between textarea and button */
+}
+
+#copingItemsList {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0; /* Remove default padding */
+    margin-top: 20px;
+}
+
+#copingItemsList li {
+    background-color: #e9f2ff; /* Light blue background for items */
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex; /* Use flexbox to align text and button */
+    justify-content: space-between; /* Push text and button to opposite ends */
+    align-items: center; /* Vertically align text and button */
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#copingItemsList li:last-child {
+    margin-bottom: 0;
+}
+
+.delete-item-btn {
+    background-color: #ff4d4f; /* Red for delete/remove */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-left: 15px; /* Space between item text and button */
+}
+
+.delete-item-btn:hover {
+    background-color: #d9363e; /* Darker red on hover */
+}
+
+/* Ensure message div on coping box page is styled if not already covered by general .message */
+#copingBoxMessage {
+    /* Styles for .message .success .error are already defined globally */
+    /* This ensures it takes those styles if it only has 'message' class initially */
+}
+
+/* Adjustments for dashboard link on coping box page if needed */
+.container p a { /* This is general, check if it's good enough */
+    /* display: inline-block; */ /* If it needs to be more button-like */
+    /* margin-top: 15px; */
+}

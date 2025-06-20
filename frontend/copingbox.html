@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Coping Box - Mental Wellness App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Coping Box</h1>
+        <p>Here are the things that help you feel better. Add more whenever you discover new ones!</p>
+
+        <div class="coping-box-content">
+            <h2>Add a New Item</h2>
+            <form id="addCopingItemForm">
+                <div>
+                    <label for="newItemText">What helps you calm down or feel better?</label>
+                    <textarea id="newItemText" name="newItemText" rows="3" required></textarea>
+                </div>
+                <button type="submit">Add to Box</button>
+            </form>
+            <div id="copingBoxMessage" class="message" style="display: none;"></div>
+
+            <h2>Your Items</h2>
+            <ul id="copingItemsList">
+                <!-- Coping items will be loaded here by JavaScript -->
+                <li>Loading your items...</li>
+            </ul>
+        </div>
+        <p style="margin-top: 30px;"><a href="dashboard.html">Back to Dashboard</a></p>
+    </div>
+    <script src="js/copingbox.js"></script>
+</body>
+</html>
