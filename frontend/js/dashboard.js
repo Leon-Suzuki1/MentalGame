@@ -1,16 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Existing Logout & Basic Protection Logic (Moved from inline) ---
+    // --- Existing Logout & Basic Protection Logic ---
     const loggedInUser = sessionStorage.getItem('loggedInUser');
     const jwtToken = sessionStorage.getItem('jwtToken');
 
-    // Basic protection: If no token, consider redirecting to login
-    // This is a simple check; more robust checks might involve token validation if possible client-side
-    // or relying on API calls to fail with 401.
     if (!jwtToken) {
-        // For this example, we'll assume API calls will handle unauthorized access.
-        // If direct redirect is desired:
-        // window.location.href = 'login.html';
         console.log("No JWT token found, user might not be logged in.");
+        // Redirect or disable features if necessary
     }
 
     const logoutLink = document.getElementById('logoutLink');
@@ -23,50 +18,88 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- New Streak Display Logic ---
-    const streakDisplay = document.getElementById('streakDisplay');
-    const API_STREAKS_URL = 'http://localhost:3000/api/streaks'; // Base URL for streaks
+    // --- Streak Display Logic ---
+    const streakDisplayArea = document.getElementById('streakDisplay'); // Main area for all streaks
+
+    // Create specific element for login streak
+    const loginStreakElement = document.createElement('p');
+    loginStreakElement.id = 'loginStreakP';
+    loginStreakElement.textContent = 'Loading login streak...';
+    if(streakDisplayArea) {
+        streakDisplayArea.innerHTML = ''; // Clear "Loading streaks..." or any previous content
+        streakDisplayArea.appendChild(loginStreakElement);
+    }
+
+    // Create specific element for journaling streak
+    const journalingStreakElement = document.createElement('p');
+    journalingStreakElement.id = 'journalingStreakP';
+    journalingStreakElement.textContent = 'Loading journaling streak...';
+    if(streakDisplayArea) {
+        streakDisplayArea.appendChild(journalingStreakElement);
+    }
+
+
+    const API_STREAKS_URL = 'http://localhost:3000/api/streaks';
 
     const fetchAndDisplayLoginStreak = async () => {
         if (!jwtToken) {
-            if(streakDisplay) streakDisplay.innerHTML = '<p>Please log in to see your streaks.</p>';
+            if (loginStreakElement) loginStreakElement.textContent = 'Please log in to see your login streak.';
             return;
         }
-        if (!streakDisplay) return; // Element not on page
+        if (!loginStreakElement) return;
 
         try {
             const response = await fetch(`${API_STREAKS_URL}/login`, {
                 method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${jwtToken}`,
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Authorization': `Bearer ${jwtToken}` }
             });
 
             if (response.status === 401) {
-                streakDisplay.innerHTML = '<p>Session expired. Please log in again.</p>';
+                loginStreakElement.textContent = 'Session expired for login streak.';
                 return;
             }
-
             const result = await response.json();
-
             if (response.ok && result.data) {
-                const currentStreak = result.data.current_streak || 0;
-                streakDisplay.innerHTML = `
-                    <p><strong>Current Login Streak:</strong> ${currentStreak} day(s)</p>
-                    <!-- <p>Longest Login Streak: ${result.data.longest_streak || 0} day(s)</p> -->
-                `;
+                loginStreakElement.innerHTML = `<strong>Current Login Streak:</strong> ${result.data.current_streak || 0} day(s)`;
             } else {
-                streakDisplay.innerHTML = '<p>Could not load login streak.</p>';
-                console.error("Failed to fetch login streak:", result.message);
+                loginStreakElement.textContent = 'Could not load login streak.';
             }
         } catch (error) {
-            console.error('Error fetching login streak:', error);
-            streakDisplay.innerHTML = '<p>Error loading login streak.</p>';
+            loginStreakElement.textContent = 'Error loading login streak.';
         }
     };
 
-    // Initial fetch of login streak
-    fetchAndDisplayLoginStreak();
+    const fetchAndDisplayJournalingStreak = async () => {
+        if (!jwtToken) {
+            if (journalingStreakElement) journalingStreakElement.textContent = 'Please log in to see your journaling streak.';
+            return;
+        }
+        if (!journalingStreakElement) return;
 
+        try {
+            const response = await fetch(`${API_STREAKS_URL}/journaling`, {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${jwtToken}` }
+            });
+
+            if (response.status === 401) {
+                journalingStreakElement.textContent = 'Session expired for journaling streak.';
+                return;
+            }
+            const result = await response.json();
+            if (response.ok && result.data) {
+                journalingStreakElement.innerHTML = `<strong>Current Journaling Streak:</strong> ${result.data.current_streak || 0} day(s)`;
+            } else {
+                journalingStreakElement.textContent = 'Could not load journaling streak.';
+            }
+        } catch (error) {
+            journalingStreakElement.textContent = 'Error loading journaling streak.';
+        }
+    };
+
+    // Initial fetch of streaks
+    if (streakDisplayArea) { // Only fetch if the display area exists
+        fetchAndDisplayLoginStreak();
+        fetchAndDisplayJournalingStreak();
+    }
 });

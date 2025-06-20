@@ -1,5 +1,6 @@
 const db = require('../database');
-const { awardBadgeIfCriteriaMet } = require('./badgeController');
+const { awardBadgeIfCriteriaMet } = require('./badgeController'); // Existing import
+const { updateUserStreak } = require('./streaksController'); // Added import for streak update
 
 // Create a new journal entry
 exports.createJournalEntry = (req, res) => {
@@ -18,14 +19,30 @@ exports.createJournalEntry = (req, res) => {
         }
 
         const newEntryId = this.lastID;
-        // Award badge
+        // Award "First Journal Entry" badge
         awardBadgeIfCriteriaMet(userId, 'First Journal Entry')
             .then(badgeResult => console.log(`Badge attempt for 'First Journal Entry' for user ${userId}: ${badgeResult.message}`))
             .catch(badgeError => console.error(`Error awarding 'First Journal Entry' badge for user ${userId}:`, badgeError));
 
+        // Update journaling streak
+        updateUserStreak(userId, 'journaling')
+            .then(streakData => {
+                console.log(`Journaling streak processed for user ${userId}:`, streakData);
+            })
+            .catch(streakError => {
+                console.error(`Failed to update journaling streak for user ${userId}:`, streakError);
+            });
+
         res.status(201).json({
             message: "Journal entry created successfully.",
-            data: { id: newEntryId, user_id: userId, title: title ? title.trim() : null, content: content.trim() }
+            data: {
+                id: newEntryId,
+                user_id: userId,
+                title: title ? title.trim() : null,
+                content: content.trim(),
+                created_at: new Date().toISOString(), // approx
+                updated_at: new Date().toISOString()  // approx
+            }
         });
     });
 };
