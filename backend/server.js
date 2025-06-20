@@ -21,6 +21,12 @@ app.use('/api/copingbox', copingBoxRoutes);
 const journalRoutes = require('./routes/journalRoutes');
 app.use('/api/journal', journalRoutes);
 
+const streaksRoutes = require('./routes/streaksRoutes');
+app.use('/api/streaks', streaksRoutes);
+
+const badgesRoutes = require('./routes/badgesRoutes');
+app.use('/api/badges', badgesRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

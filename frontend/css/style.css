@@ -302,3 +302,115 @@ p {
     /* General .message styles should apply */
     /* text-align: center; */ /* if not already centered */
 }
+
+/* Streaks Display on Dashboard */
+.streak-info {
+    background-color: #e9f2ff; /* Light blue, similar to coping box items */
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center; /* Center streak text */
+    border: 1px solid #cce0ff;
+}
+
+.streak-info p {
+    margin: 5px 0;
+    color: #0052cc; /* Darker blue for text */
+    font-size: 1em;
+}
+
+.streak-info strong {
+    font-weight: 600;
+}
+
+/* Badges Page Styling */
+#earnedBadgesSection h2,
+#allBadgesSection h2 {
+    color: #0052cc; /* Blue for section titles */
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between badge items */
+    margin-top: 10px;
+}
+
+.badge-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Stack icon and info vertically */
+    align-items: center; /* Center content */
+    text-align: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.badge-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.badge-icon {
+    width: 60px; /* Fixed size for actual icons */
+    height: 60px;
+    margin-bottom: 12px;
+    object-fit: contain; /* Ensure icon fits well */
+    border-radius: 50%; /* Circular icons look good */
+    background-color: #f0f0f0; /* Placeholder bg if image is transparent or fails */
+}
+
+.badge-icon-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px; /* Large initial letter */
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.badge-info h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.badge-info p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.badge-info .earned-date {
+    font-size: 0.8em;
+    color: #007bff; /* Blue for earned date */
+    font-style: italic;
+}
+
+/* Differentiation for earned/unearned badges */
+.badge-item.unearned {
+    opacity: 0.6; /* Make unearned badges less prominent */
+    /* filter: grayscale(80%); */ /* Optional: make them grayscale */
+}
+
+.badge-item.unearned .badge-icon-placeholder {
+    background-color: #adb5bd; /* Grey for unearned placeholder */
+}
+
+.badge-item.earned .badge-icon-placeholder {
+    /* Already has primary blue, which is fine for earned */
+}

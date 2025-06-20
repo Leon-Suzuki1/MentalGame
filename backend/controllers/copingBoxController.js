@@ -1,4 +1,5 @@
 const db = require('../database');
+const { awardBadgeIfCriteriaMet } = require('./badgeController');
 
 // Get all coping box items for a user
 exports.getCopingBoxItems = (req, res) => {
@@ -35,9 +36,16 @@ exports.addCopingBoxItem = (req, res) => {
             res.status(500).json({ message: "Error adding coping box item.", error: err.message });
             return;
         }
+
+        const newItemId = this.lastID;
+        // Award badge after successfully adding item
+        awardBadgeIfCriteriaMet(userId, 'First Coping Item')
+            .then(badgeResult => console.log(`Badge attempt for 'First Coping Item' for user ${userId}: ${badgeResult.message}`))
+            .catch(badgeError => console.error(`Error awarding 'First Coping Item' badge for user ${userId}:`, badgeError));
+
         res.status(201).json({
             message: "Coping box item added successfully.",
-            data: { id: this.lastID, user_id: userId, item_text: item_text.trim(), created_at: new Date().toISOString() }
+            data: { id: newItemId, user_id: userId, item_text: item_text.trim(), created_at: new Date().toISOString() }
         });
     });
 };

@@ -1,4 +1,5 @@
 const db = require('../database');
+const { awardBadgeIfCriteriaMet } = require('./badgeController');
 
 // Create a new journal entry
 exports.createJournalEntry = (req, res) => {
@@ -15,9 +16,16 @@ exports.createJournalEntry = (req, res) => {
         if (err) {
             return res.status(500).json({ message: "Error creating journal entry.", error: err.message });
         }
+
+        const newEntryId = this.lastID;
+        // Award badge
+        awardBadgeIfCriteriaMet(userId, 'First Journal Entry')
+            .then(badgeResult => console.log(`Badge attempt for 'First Journal Entry' for user ${userId}: ${badgeResult.message}`))
+            .catch(badgeError => console.error(`Error awarding 'First Journal Entry' badge for user ${userId}:`, badgeError));
+
         res.status(201).json({
             message: "Journal entry created successfully.",
-            data: { id: this.lastID, user_id: userId, title: title ? title.trim() : null, content: content.trim() }
+            data: { id: newEntryId, user_id: userId, title: title ? title.trim() : null, content: content.trim() }
         });
     });
 };

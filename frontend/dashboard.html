@@ -11,27 +11,17 @@
         <h1>Welcome!</h1>
         <p>You are successfully logged in.</p>
 
+        <div id="streakDisplay" class="streak-info"> <!-- Added Streak Display Area -->
+            <p>Loading streaks...</p>
+        </div>
+
         <p><a href="copingbox.html">My Coping Box</a></p>
-        <p><a href="journal.html">My Journal</a></p> <!-- Added this line -->
+        <p><a href="journal.html">My Journal</a></p>
+        <p><a href="badges.html">My Badges</a></p> <!-- Added this line -->
 
         <p style="margin-top: 20px;"><a href="login.html" id="logoutLink">Logout</a></p>
     </div>
-    <script>
-        // ... (existing script for logout and basic protection)
-        const loggedInUser = sessionStorage.getItem('loggedInUser');
-        // if (!loggedInUser && !sessionStorage.getItem('jwtToken')) { // More robust check
-        //     window.location.href = 'login.html';
-        // }
-
-        const logoutLink = document.getElementById('logoutLink');
-        if(logoutLink) {
-            logoutLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                sessionStorage.removeItem('loggedInUser');
-                sessionStorage.removeItem('jwtToken');
-                window.location.href = 'login.html';
-            });
-        }
-    </script>
+    <!-- Removed inline script, added script link below -->
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
