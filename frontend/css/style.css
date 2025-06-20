@@ -1,0 +1,125 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #f4f7f9; /* Light grey-blue background */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+h1 {
+    color: #0052cc; /* Darker blue for heading */
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+form div {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="text"],
+textarea {
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.message {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda; /* Light green */
+    color: #155724; /* Dark green */
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da; /* Light red */
+    color: #721c24; /* Dark red */
+    border: 1px solid #f5c6cb;
+}
+
+/* Basic responsive adjustment for smaller screens */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+}
