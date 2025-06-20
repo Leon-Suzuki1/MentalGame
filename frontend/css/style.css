@@ -498,3 +498,119 @@ p {
     /* General .message styles should apply */
     margin-top: 15px; /* Add some space above the message if it appears after form */
 }
+
+/* Thought Matching Game Page Styles */
+
+.game-container {
+    max-width: 700px; /* Allow a bit more width for game layout */
+}
+
+#gameControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+#scoreArea {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0052cc; /* Blue for score */
+}
+
+#gamePlayArea {
+    margin-bottom: 25px;
+}
+
+.game-question-box {
+    background-color: #e9f2ff; /* Light blue background for question */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #333;
+    text-align: center;
+    min-height: 60px; /* Ensure some height even for short questions */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-choices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for choices */
+    gap: 15px;
+}
+
+.choice-button {
+    /* .button-secondary is a good base, but we might want specific padding/height */
+    background-color: #f8f9fa; /* Lighter, neutral background for choices */
+    color: #333;
+    border: 1px solid #ced4da;
+    padding: 15px 10px; /* Make buttons a bit taller */
+    text-align: left; /* Align text to left, typical for choice buttons */
+    width: 100%; /* Ensure full width within grid cell */
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    font-size: 0.95em;
+    line-height: 1.4;
+    border-radius: 8px; /* Consistent rounded corners */
+}
+
+.choice-button:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    transform: translateY(-2px);
+}
+
+.choice-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.choice-button.correct-answer,
+.choice-button.correct-answer-reveal { /* Style for correctly selected or revealed correct answer */
+    background-color: #28a745; /* Green for correct */
+    color: white;
+    border-color: #1e7e34;
+}
+
+.choice-button.incorrect-answer { /* Style for incorrectly selected answer */
+    background-color: #dc3545; /* Red for incorrect */
+    color: white;
+    border-color: #c82333;
+}
+
+#gameFeedbackArea {
+    margin-top: 15px;
+    min-height: 2.5em; /* Reserve space for feedback */
+    text-align: center;
+    font-weight: bold;
+}
+/* .message.success and .message.error styles are already defined and will be used by gameFeedbackArea */
+
+
+#nextQuestionButton,
+#playAgainButton {
+    /* Uses .button-primary, ensure it's suitable or add overrides */
+    margin-top: 20px;
+    display: block; /* Make it block to center easily if needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameResultsArea {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f7f9;
+    border-radius: 8px;
+}
+
+#gameResultsArea h2 {
+    color: #0052cc;
+    margin-bottom: 10px;
+}
+
+#gameResultsArea p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}

@@ -30,6 +30,9 @@ app.use('/api/badges', badgesRoutes);
 const rephrasedThoughtRoutes = require('./routes/rephrasedThoughtRoutes');
 app.use('/api/rephrase', rephrasedThoughtRoutes);
 
+const gameRoutes = require('./routes/gameRoutes');
+app.use('/api/game', gameRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

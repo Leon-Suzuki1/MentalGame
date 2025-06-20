@@ -78,16 +78,19 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                         { name: 'First Coping Item', description: 'Added your first item to the Coping Box.', icon_url: 'icons/badge_coping_first.png', criteria: 'ADD_FIRST_COPING_ITEM' },
                         { name: 'First Journal Entry', description: 'Wrote your first journal entry.', icon_url: 'icons/badge_journal_first.png', criteria: 'CREATE_FIRST_JOURNAL_ENTRY' },
                         { name: '5 Day Login Streak', description: 'Logged in 5 days in a row.', icon_url: 'icons/badge_login_5_day.png', criteria: 'LOGIN_STREAK_5' },
-                        { name: 'Mindful Start', description: 'Completed your first mindfulness exercise.', icon_url: 'icons/badge_mindful_start.png', criteria: 'MINDFULNESS_FIRST_EXERCISE'}
+                        { name: 'Mindful Start', description: 'Completed your first mindfulness exercise.', icon_url: 'icons/badge_mindful_start.png', criteria: 'MINDFULNESS_FIRST_EXERCISE'},
+                        { name: 'First Game Played', description: 'Completed your first round of the Thought Matching Game.', icon_url: 'icons/badge_game_first.png', criteria: 'GAME_FIRST_ROUND_COMPLETE' } // Added
                     ];
+                    const stmt = db.prepare("INSERT OR IGNORE INTO badges (name, description, icon_url, criteria) VALUES (?, ?, ?, ?)");
                     badgesToInsert.forEach(badge => {
-                        db.run("INSERT OR IGNORE INTO badges (name, description, icon_url, criteria) VALUES (?, ?, ?, ?)",
-                               [badge.name, badge.description, badge.icon_url, badge.criteria],
-                               (insertErr) => {
-                                   if (insertErr) console.error("Error inserting badge:", badge.name, insertErr.message);
-                               });
+                        stmt.run(badge.name, badge.description, badge.icon_url, badge.criteria, (insertErr) => {
+                            if (insertErr) console.error("Error inserting badge:", badge.name, insertErr.message);
+                        });
                     });
-                    console.log("Initial badges checked/inserted.");
+                    stmt.finalize((finalizeErr) => {
+                        if (finalizeErr) console.error("Error finalizing badge insertion statement:", finalizeErr.message);
+                        else console.log("Initial badges checked/inserted (including First Game Played).");
+                    });
                 }
             });
 
@@ -123,6 +126,46 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                     console.log('Rephrased thoughts table checked/created successfully.');
                 }
             });
+
+            // Game Matching Pairs table
+            db.run(`CREATE TABLE IF NOT EXISTS game_matching_pairs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                negative_thought TEXT UNIQUE NOT NULL,
+                healthy_alternative TEXT NOT NULL,
+                difficulty INTEGER DEFAULT 1,
+                category TEXT
+            )`, (err) => {
+                if (err) {
+                    console.error("Error creating game_matching_pairs table:", err.message);
+                } else {
+                    console.log('Game matching pairs table checked/created successfully.');
+
+                    const gamePairsToInsert = [
+                        { negative: "I'm a failure at everything I try.", healthy: "I've had setbacks, but I've also succeeded. I can learn from this.", category: "Self-esteem" },
+                        { negative: "Everyone is probably judging me.", healthy: "Most people are focused on themselves. I can't control others' thoughts, only my reactions.", category: "Social Anxiety" },
+                        { negative: "This is too hard, I'll never get it.", healthy: "This is challenging, but I can break it down and ask for help if needed.", category: "Perfectionism" },
+                        { negative: "I always mess things up.", healthy: "I make mistakes sometimes, like everyone. It's an opportunity to grow.", category: "Self-esteem" },
+                        { negative: "No one understands me.", healthy: "It can feel lonely, but I can try to communicate my feelings more clearly.", category: "Relationships" },
+                        { negative: "What if something terrible happens?", healthy: "I can focus on what I can control and deal with challenges as they come.", category: "General Anxiety" },
+                        { negative: "I'm not good enough.", healthy: "I have inherent worth, and my value doesn't depend on external achievements.", category: "Self-esteem" },
+                        { negative: "It's all my fault.", healthy: "I can take responsibility for my part, but many factors are usually involved.", category: "Guilt" },
+                        { negative: "I'll never be happy.", healthy: "Happiness isn't constant, but I can find moments of joy and work towards contentment.", category: "Depressive Thoughts" },
+                        { negative: "I shouldn't feel this way.", healthy: "My feelings are valid, even if uncomfortable. It's okay to feel what I feel.", category: "Emotional Regulation" }
+                    ];
+
+                    const stmt = db.prepare("INSERT OR IGNORE INTO game_matching_pairs (negative_thought, healthy_alternative, category, difficulty) VALUES (?, ?, ?, 1)");
+                    gamePairsToInsert.forEach(pair => {
+                        stmt.run(pair.negative, pair.healthy, pair.category, (insertErr) => {
+                            if (insertErr) console.error(`Error inserting game pair '${pair.negative}':`, insertErr.message);
+                        });
+                    });
+                    stmt.finalize((finalizeErr) => {
+                        if (finalizeErr) console.error("Error finalizing game pair insertion statement:", finalizeErr.message);
+                        else console.log("Initial game matching pairs checked/inserted.");
+                    });
+                }
+            });
+
         });
     }
 });

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game - Mental Wellness App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container game-container">
+        <h1>Thought Matching Game</h1>
+        <p>Match the negative thought with its healthier alternative.</p>
+
+        <div id="gameControls">
+            <button id="startGameButton" class="button-primary">Start Game</button>
+            <div id="scoreArea" style="display: none;">Score: <span id="currentScore">0</span></div>
+        </div>
+
+        <div id="gamePlayArea" style="display: none;">
+            <div id="gameQuestionArea" class="game-question-box">
+                <!-- Negative thought will be displayed here -->
+            </div>
+
+            <div id="gameChoicesArea" class="game-choices-grid">
+                <!-- Answer choices (buttons) will be displayed here -->
+            </div>
+
+            <div id="gameFeedbackArea" class="message" style="display: none;">
+                <!-- Feedback like "Correct!" or "Try again!" -->
+            </div>
+
+            <button id="nextQuestionButton" class="button-primary" style="display: none;">Next Question</button>
+        </div>
+
+        <div id="gameResultsArea" style="display: none;">
+            <h2>Round Complete!</h2>
+            <p>Your final score: <span id="finalScore">0</span></p>
+            <button id="playAgainButton" class="button-primary">Play Again</button>
+        </div>
+
+        <p style="margin-top: 30px;"><a href="dashboard.html">Back to Dashboard</a></p>
+    </div>
+    <script src="js/game_matching.js"></script>
+</body>
+</html>
